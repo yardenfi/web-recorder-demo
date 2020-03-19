@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/index.js"></script>
+</head>
+<body>
+
+<script>
+  console.log("getting");
+  fetch("http://localhost:3000")
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      new rrwebPlayer({
+        target: document.body, // customizable root element
+        data: {
+          events: res.events,
+          autoPlay: true,
+        },
+      });
+    });
+</script>
+</body>
+</html>
