@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import * as rrweb from 'rrweb';
+import {ReplayService} from '../replay-service/replay.service';
 
 @Component({
   selector: 'app-replay',
@@ -9,11 +10,11 @@ import * as rrweb from 'rrweb';
 })
 export class ReplayComponent {
 
-  constructor(private http: HttpClient) { }
+  constructor(private replayService: ReplayService) { }
 
   replay(element) {
-    this.http.get<{ events: any[] }>('http://localhost:3000').subscribe(res => {
-      const player = new rrweb.Replayer(res.events, {root: element});
+    this.replayService.getEvents().subscribe(events => {
+      const player = new rrweb.Replayer(events, {root: element});
       player.play();
     });
   }

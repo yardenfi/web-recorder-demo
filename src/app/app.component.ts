@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as rrweb from "rrweb";
-import {HttpClient} from '@angular/common/http';
+import {ReplayService} from './replay-service/replay.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +8,10 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'sandbox';
   stopCallback: () => void;
   events: any[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private replayService: ReplayService) {
   }
 
   startRecording() {
@@ -21,12 +20,10 @@ export class AppComponent {
         this.events.push(event);
       },
     });
-    console.log(this.stopCallback);
   }
 
   saveEvents() {
-    this.http.post<{events: any[]}>("http://localhost:3000/events", this.events).subscribe();
+    this.replayService.addEvents(this.events);
     this.stopCallback();
-    console.log(this.events);
   }
 }
