@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ReplayComponent } from './replay/replay.component';
-import {ReplayService} from './replay-service/replay.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +14,7 @@ import {ReplayService} from './replay-service/replay.service';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [ReplayService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

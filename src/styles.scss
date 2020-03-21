@@ -1,0 +1,7 @@
+@import "src/app/variables";
+
+html, body {
+  //background-color: $background-color!important;
+  background: rgb(177,176,196);
+  background: linear-gradient(90deg, rgba(177,176,196,1) 0%, rgba(214,214,227,1) 50%, rgba(231,237,237,1) 100%);
+}

@@ -24,11 +24,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/rrweb/dist/rrweb.min.css"
+              "node_modules/rrweb-player/dist/style.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/rrweb-player/dist/index.js"
+            ]
           },
           "configurations": {
             "production": {

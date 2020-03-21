@@ -1,7 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import * as rrweb from 'rrweb';
-import {ReplayService} from '../replay-service/replay.service';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-replay',
@@ -9,13 +6,25 @@ import {ReplayService} from '../replay-service/replay.service';
   styleUrls: ['./replay.component.css']
 })
 export class ReplayComponent {
+  @Input() events: any[];
+  @Input() stopRecordingCallback: () => void;
 
-  constructor(private replayService: ReplayService) { }
+  webPlayer: rrwebPlayer;
 
-  replay(element) {
-    this.replayService.getEvents().subscribe(events => {
-      const player = new rrweb.Replayer(events, {root: element});
-      player.play();
+  replay(element: HTMLElement) {
+    this.stopRecordingCallback();
+
+    if (this.webPlayer) {
+      element.innerHTML = '';
+      delete this.webPlayer;
+    }
+
+    this.webPlayer = new rrwebPlayer({
+      target: element, // customizable root element
+      data: {
+        events: this.events,
+        autoPlay: true,
+      },
     });
   }
 }

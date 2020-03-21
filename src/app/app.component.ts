@@ -1,29 +1,21 @@
 import { Component } from '@angular/core';
-import * as rrweb from "rrweb";
-import {ReplayService} from './replay-service/replay.service';
+import {record} from 'rrweb';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   stopCallback: () => void;
-  events: any[] = [];
-
-  constructor(private replayService: ReplayService) {
-  }
+  events: any[];
 
   startRecording() {
-    this.stopCallback = rrweb.record({
+    this.events = [];
+    this.stopCallback = record({
       emit: (event) => {
         this.events.push(event);
       },
     });
-  }
-
-  saveEvents() {
-    this.replayService.addEvents(this.events);
-    this.stopCallback();
   }
 }
